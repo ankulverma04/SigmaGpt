@@ -1,0 +1,30 @@
+import mongoose from "mongoose";
+import { MessageSchema } from "./Message.js";
+
+const ThreadSchema = new mongoose.Schema({
+  threadId: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  title: {
+    type: String,
+    default: "new chat",
+  },
+  message: [MessageSchema],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+export default mongoose.model("Thread", ThreadSchema);
