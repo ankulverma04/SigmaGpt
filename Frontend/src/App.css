@@ -2,14 +2,24 @@
   color: #ececec;
   font-family: Roboto, "Open Sans", "Helvetica Neue", sans-serif;
 }
+html,
+body,
+#root {
+  height: 100%;
+  height: 100dvh;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
 body {
   padding: 0;
   margin: 0;
+  background-color: #212121;
 }
 .main {
   background-color: #212121;
   display: flex;
-  height: 100vh;
+  height: 100%;
   height: 100dvh;
   overflow: hidden;
 }
