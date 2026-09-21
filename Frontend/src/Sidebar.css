@@ -9,10 +9,20 @@
   flex-direction: column;
 }
 
-button {
+.sidebarOverlay {
+  display: none;
+}
+
+.sidebarTop {
+  display: flex;
+  align-items: center;
+}
+
+.newChatBtn {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex: 1;
   padding: 8px 12px;
   margin: 10px;
   font-size: 15px;
@@ -23,13 +33,32 @@ button {
   color: #ececec;
 }
 
-button img {
+.newChatBtn img {
   height: 23px;
   width: 23px;
   border-radius: 12px;
 }
 
-button i {
+.newChatBtn i {
+  font-size: 18px;
+}
+
+.closeSidebarBtn {
+  display: none;
+  width: 36px;
+  height: 36px;
+  margin: 10px 10px 10px 0;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #ececec;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.closeSidebarBtn i {
   font-size: 18px;
 }
 
@@ -79,8 +108,11 @@ button i {
   margin: 0;
   padding: 4px 6px;
   border: none;
+  background: transparent;
   opacity: 0;
   pointer-events: none;
+  cursor: pointer;
+  color: #ececec;
 }
 
 .history li:hover .deleteBtn,
@@ -95,4 +127,38 @@ button i {
   text-align: center;
   font-size: 15px;
   border-top: solid 0.25px rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .sidebarOverlay.show {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 20;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 30;
+    width: min(320px, 86vw);
+    min-width: 0;
+    transform: translateX(-100%);
+    transition: transform 0.22s ease;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .closeSidebarBtn {
+    display: flex;
+  }
+
+  .deleteBtn {
+    opacity: 0.85;
+    pointer-events: auto;
+  }
 }

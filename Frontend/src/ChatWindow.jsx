@@ -18,6 +18,7 @@ function ChatWindow() {
     setLoading,
     fetchThreads,
     logout,
+    setSidebarOpen,
   } = useContext(MyContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
@@ -90,9 +91,19 @@ function ChatWindow() {
   return (
     <div className="chatWindow">
       <div className="navbar">
-        <span>
-          SigmaGpt<i className="fa-solid fa-circle-chevron-down"></i>
-        </span>
+        <div className="navLeft">
+          <button
+            type="button"
+            className="menuBtn"
+            onClick={() => setSidebarOpen(true)}
+            aria-label="Open sidebar"
+          >
+            <i className="fa-solid fa-bars"></i>
+          </button>
+          <span>
+            SigmaGpt<i className="fa-solid fa-circle-chevron-down"></i>
+          </span>
+        </div>
         <div className="profileWrap" ref={menuRef}>
           <button
             type="button"

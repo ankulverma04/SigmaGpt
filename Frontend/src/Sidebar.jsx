@@ -14,11 +14,15 @@ function Sidebar() {
     setPromt,
     fetchThreads,
     createNewChat,
+    sidebarOpen,
+    setSidebarOpen,
   } = useContext(MyContext);
 
   useEffect(() => {
     fetchThreads();
   }, [fetchThreads]);
+
+  const closeSidebar = () => setSidebarOpen(false);
 
   const openThread = async (threadId) => {
     try {
@@ -28,6 +32,7 @@ function Sidebar() {
       setNewChat(false);
       setReply(null);
       setPromt("");
+      closeSidebar();
     } catch (err) {
       console.log(err);
     }
@@ -51,38 +56,54 @@ function Sidebar() {
   };
 
   return (
-    <section className="sidebar">
-      <button type="button" onClick={createNewChat}>
-        <img src="/chatgpt.jpg" alt="SigmaGpt" className="mainImg" />
-        <span>New chat</span>
-        <i className="fa-solid fa-pen-to-square"></i>
-      </button>
-
-      <ul className="history">
-        {allThreads.length === 0 && <li className="empty">No chats yet</li>}
-        {allThreads.map((thread) => (
-          <li
-            key={thread.threadId}
-            className={currThreadId === thread.threadId ? "active" : ""}
-            onClick={() => openThread(thread.threadId)}
+    <>
+      <div
+        className={`sidebarOverlay ${sidebarOpen ? "show" : ""}`}
+        onClick={closeSidebar}
+      />
+      <section className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+        <div className="sidebarTop">
+          <button type="button" className="newChatBtn" onClick={createNewChat}>
+            <img src="/chatgpt.jpg" alt="SigmaGpt" className="mainImg" />
+            <span>New chat</span>
+            <i className="fa-solid fa-pen-to-square"></i>
+          </button>
+          <button
+            type="button"
+            className="closeSidebarBtn"
+            onClick={closeSidebar}
+            aria-label="Close sidebar"
           >
-            <span>{thread.title || "New Chat"}</span>
-            <button
-              type="button"
-              className="deleteBtn"
-              onClick={(event) => removeThread(event, thread.threadId)}
-              aria-label="Delete chat"
-            >
-              <i className="fa-solid fa-trash"></i>
-            </button>
-          </li>
-        ))}
-      </ul>
+            <i className="fa-solid fa-xmark"></i>
+          </button>
+        </div>
 
-      <div className="sign">
-        <p>By Ankul Verma 🩶</p>
-      </div>
-    </section>
+        <ul className="history">
+          {allThreads.length === 0 && <li className="empty">No chats yet</li>}
+          {allThreads.map((thread) => (
+            <li
+              key={thread.threadId}
+              className={currThreadId === thread.threadId ? "active" : ""}
+              onClick={() => openThread(thread.threadId)}
+            >
+              <span>{thread.title || "New Chat"}</span>
+              <button
+                type="button"
+                className="deleteBtn"
+                onClick={(event) => removeThread(event, thread.threadId)}
+                aria-label="Delete chat"
+              >
+                <i className="fa-solid fa-trash"></i>
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <div className="sign">
+          <p>By Ankul Verma 🩶</p>
+        </div>
+      </section>
+    </>
   );
 }
 

@@ -16,6 +16,7 @@ function App() {
   const [newChat, setNewChat] = useState(true);
   const [allThreads, setAllThreads] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const token = getToken();
@@ -40,7 +41,8 @@ function App() {
       const threads = await api.getThreads();
       setAllThreads(
         threads.filter(
-          (thread) => Array.isArray(thread.message) && thread.message.length > 0,
+          (thread) =>
+            Array.isArray(thread.message) && thread.message.length > 0,
         ),
       );
     } catch (err) {
@@ -54,6 +56,7 @@ function App() {
     setReply(null);
     setPromt("");
     setNewChat(true);
+    setSidebarOpen(false);
   }, []);
 
   const logout = useCallback(() => {
@@ -87,6 +90,8 @@ function App() {
     fetchThreads,
     createNewChat,
     logout,
+    sidebarOpen,
+    setSidebarOpen,
   };
 
   if (authChecking) {

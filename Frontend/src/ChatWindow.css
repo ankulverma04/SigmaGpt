@@ -18,12 +18,35 @@
   align-items: center;
   padding: 10px 8px;
 }
-.navbar > span {
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.navbar .navLeft span {
   margin: 0.5rem 1.5rem;
   font-weight: 500;
 }
-.navbar > span i {
+.navbar .navLeft span i {
   margin-left: 6px;
+}
+.menuBtn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  margin: 0 0 0 8px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #ececec;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.menuBtn i {
+  font-size: 18px;
+  color: #ececec;
 }
 .profileWrap {
   position: relative;
@@ -154,4 +177,23 @@
 }
 #submit:disabled i {
   color: #9a9a9a;
+}
+
+@media (max-width: 768px) {
+  .menuBtn {
+    display: flex;
+  }
+  .navbar .navLeft span {
+    margin: 0.5rem 0.4rem;
+  }
+  .profileWrap {
+    margin: 0.5rem 0.8rem;
+  }
+  .chatInput {
+    width: calc(100% - 20px);
+    padding-bottom: 12px;
+  }
+  .profileMenu {
+    width: min(220px, calc(100vw - 24px));
+  }
 }

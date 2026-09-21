@@ -56,3 +56,18 @@
 .typing {
   color: #b4b4b4;
 }
+
+@media (max-width: 768px) {
+  .emptyChat h1 {
+    font-size: 22px;
+  }
+
+  .userDiv,
+  .gptDiv {
+    padding: 0 12px;
+  }
+
+  .userMessage {
+    max-width: 85%;
+  }
+}
